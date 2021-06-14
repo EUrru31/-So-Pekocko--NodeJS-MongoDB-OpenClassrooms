@@ -1,10 +1,14 @@
 const express = require("express");
-const Thing = require("./models/thing");
 const app = express();
+const mongoose = require("mongoose");
+const path = require("path");
+
+const saucesRoutes = require("./routes/sauces");
+const userRoutes = require("./routes/user");
 
 mongoose
     .connect(
-        "mongodb+srv://nafsi_31:E44fi88e@cluster0-pme76.mongodb.net/test?retryWrites=true&w=majority",
+        "mongodb+srv://nafsi_31:E44fi88e@cluster0.g89xg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
         { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -30,19 +34,9 @@ app.use(
     })
 );
 
-app.post("/api/sauces", (req, res, next) => {
-    delete req.body._id;
-    const thing = new Thing({
-        ...req.body,
-    });
-    thing
-        .save()
-        .then(() => res.status(201).json({ message: "Objet enregistré !" }))
-        .catch((error) => res.status(400).json({ error }));
-});
+app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.use("/api/sauces", (req, res, next) => {
-    res.status(200).json(stuff);
-});
+app.use("/api/sauces", saucesRoutes);
+app.use("/api/auth", userRoutes);
 
 module.exports = app;
