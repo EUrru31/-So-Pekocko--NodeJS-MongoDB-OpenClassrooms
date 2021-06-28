@@ -1,10 +1,13 @@
 const express = require("express");
+const helmet = require("helmet");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
 
 const saucesRoutes = require("./routes/sauces");
 const userRoutes = require("./routes/user");
+
+app.use(helmet());
 
 mongoose
     .connect(
