@@ -1,7 +1,5 @@
 const Sauce = require("../models/sauces");
 const fs = require("fs");
-const like = ;
-const dislike = ;
 
 exports.createSauce = (req, res, next) => {
     const saucesObject = JSON.parse(req.body.sauce);
@@ -79,14 +77,33 @@ exports.getAllSauces = (req, res, next) => {
         });
 };
 
-exports.likeSauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
-        .then()
-        .catch((error) => res.status(500).json({ error }));
-};
+exports.likeDislike = (req, res, next) => {
+    let like = req.body.like;
+    let sauceId = req.params.id;
+    let userId = req.body.userId;
 
-exports.dislikeSauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id })
-        .then()
-        .catch((error) => res.status(500).json({ error }));
+    if (like === 1)
+        Sauce.modifySauce(
+            { _id: sauceId },
+            {
+                $push: { usersLiked: req.body.userId },
+                $inc: { likes: 1 },
+            }
+        );
+    if (like === 0)
+        Sauce.modifySauce(
+            { _id: sauceId },
+            {
+                $push: { usersLiked: req.body.userId },
+                $inc: { likes: 0 },
+            }
+        );
+    if (like === -1)
+        Sauce.modifySauce(
+            { _id: sauceId },
+            {
+                $push: { usersDisliked: req.body.userId },
+                $inc: { likes: -1 },
+            }
+        );
 };
