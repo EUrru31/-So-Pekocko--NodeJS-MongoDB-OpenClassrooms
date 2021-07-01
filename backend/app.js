@@ -9,6 +9,7 @@ const userRoutes = require("./routes/user");
 
 app.use(helmet());
 
+// Acces Base de donnée MongoDB
 mongoose
     .connect(
         "mongodb+srv://nafsi_31:E44fi88e@cluster0.g89xg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
@@ -17,6 +18,7 @@ mongoose
     .then(() => console.log("Connexion à MongoDB réussie !"))
     .catch(() => console.log("Connexion à MongoDB échouée !"));
 
+// Autorisation des requètes
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
