@@ -13,7 +13,7 @@ app.use(helmet());
 // Acces Base de donnée MongoDB
 mongoose
     .connect(
-        "mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cluster0.g89xg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+        `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.g89xg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
         { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => console.log("Connexion à MongoDB réussie !"))

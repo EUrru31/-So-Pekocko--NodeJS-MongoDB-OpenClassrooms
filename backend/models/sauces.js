@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validate = require("mongoose-validator");
 
 const sauceSchema = mongoose.Schema({
     userId: {
@@ -9,7 +10,7 @@ const sauceSchema = mongoose.Schema({
         type: String,
         required: true,
         validate: [
-            validator({
+            validate({
                 validator: "matches",
                 arguments: /^[@&()_$£`+=\?#]+$/,
                 message: "Le champ ne doit pas contenir de caractères spéciaux",
@@ -20,7 +21,7 @@ const sauceSchema = mongoose.Schema({
         type: String,
         required: true,
         validate: [
-            validator({
+            validate({
                 validator: "matches",
                 arguments: /^[@&()_$£`+=\?#]+$/,
                 message: "Le champ ne doit pas contenir de caractères spéciaux",
@@ -32,7 +33,7 @@ const sauceSchema = mongoose.Schema({
         type: String,
         required: true,
         validate: [
-            validator({
+            validate({
                 validator: "matches",
                 arguments: /^[@&()_$£`+=\?#]+$/,
                 message: "Le champ ne doit pas contenir de caractères spéciaux",
