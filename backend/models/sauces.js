@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validate = require("mongoose-validator");
 
+// Schéma de donnée
 const sauceSchema = mongoose.Schema({
     userId: {
         type: String,

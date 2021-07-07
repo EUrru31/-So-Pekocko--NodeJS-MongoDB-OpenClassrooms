@@ -20,6 +20,7 @@ mongoose
     .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // Autorisation des requètes
+// Accès à l'API depuis n'importe quelle origine
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
